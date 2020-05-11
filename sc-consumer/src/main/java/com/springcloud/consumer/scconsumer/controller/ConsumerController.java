@@ -1,6 +1,6 @@
-package com.springcloud.cousumer.sccousumer.controller;
+package com.springcloud.consumer.scconsumer.controller;
 
-import com.springcloud.cousumer.sccousumer.service.ProductService;
+import com.springcloud.consumer.scconsumer.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

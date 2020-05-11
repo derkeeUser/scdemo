@@ -1,4 +1,4 @@
-package com.springcloud.cousumer.sccousumer.service;
+package com.springcloud.consumer.scconsumer.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

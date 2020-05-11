@@ -1,4 +1,4 @@
-package com.springcloud.cousumer.sccousumer;
+package com.springcloud.consumer.scconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
