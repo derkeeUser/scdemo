@@ -31,6 +31,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.springcloud.entity</groupId>
+            <artifactId>sc-entity</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -38,6 +42,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.springcloud.consumer.scconsumer.ScCousumerApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

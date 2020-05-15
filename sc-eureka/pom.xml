@@ -27,6 +27,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.springcloud.eureka.sceureka.ScEurekaApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
