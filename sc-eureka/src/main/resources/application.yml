@@ -5,7 +5,7 @@ server:
         context-path: /
 spring:
     application:
-        name: EUREKA-SERVER
+        name: eureka-server
 eureka:
     client:
         fetch-registry: false

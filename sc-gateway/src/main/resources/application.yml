@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: GATEWAY-SERVER
+    name: gateway-server
   cloud:
     gateway:
       discovery:

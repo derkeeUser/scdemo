@@ -24,7 +24,7 @@ public class ConsumerController {
     }
 
     @GetMapping("/get_product")
-    public String getConsumer(Integer id) {
+    public Object getConsumer(Integer id) {
         try {
             return productService.getProduct(id);
         } catch (Exception e) {

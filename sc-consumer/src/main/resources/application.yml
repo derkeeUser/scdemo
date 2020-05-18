@@ -6,7 +6,7 @@ server:
 
 spring:
   application:
-    name: CONSUMER-SERVER
+    name: consumer-server
 
 eureka:
   client:
@@ -15,4 +15,8 @@ eureka:
 
 ribbon:
   eureka:
+    enabled: true
+
+feign:
+  hystrix:
     enabled: true
