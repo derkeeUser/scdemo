@@ -56,7 +56,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8090/eureka
+      defaultZone: http://root:123456@localhost:8090/eureka
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

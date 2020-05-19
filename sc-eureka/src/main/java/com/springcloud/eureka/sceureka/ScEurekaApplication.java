@@ -18,7 +18,7 @@ public class ScEurekaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ScEurekaApplication.class, args);
-        System.out.println("注册中心启动成功:http://localhost:8090/eureka √");
+        System.out.println("注册中心启动成功 √");
     }
 
 }
