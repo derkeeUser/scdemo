@@ -4,9 +4,14 @@ import com.springcloud.entity.scentity.product.TProduct;
 import com.springcloud.product.scproduct.service.TProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * (TProduct)表控制层
@@ -17,7 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/product")
+@RefreshScope
 public class TProductController {
+
+    @Value("${user.username:cxm}")
+    private String username;
+    @Value("${user.password:123}")
+    private String password;
     /**
      * 服务对象
      */
@@ -43,6 +54,14 @@ public class TProductController {
             log.error("获取数据异常：{}", e.getMessage(), e);
             return null;
         }
+    }
+
+    @GetMapping("/get/value")
+    public Object getValue() {
+        Map<String, String> result = new HashMap<>();
+        result.put("username", username);
+        result.put("password", password);
+        return result;
     }
 
 }

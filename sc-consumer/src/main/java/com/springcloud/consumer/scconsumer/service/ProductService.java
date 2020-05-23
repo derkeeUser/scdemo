@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author: xiaoming·Chen
  * @create: 2020-04-27 10:20:54
  */
-@FeignClient(name = "PRODUCT-SERVER", fallback = ProductServiceHystrix.class)
+@FeignClient(name = "product-server", fallback = ProductServiceHystrix.class)
 public interface ProductService {
 
     /**

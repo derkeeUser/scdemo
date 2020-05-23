@@ -1,0 +1,26 @@
+server:
+  servlet:
+    ## 此处设置值需要加入到请求路径中，如/consumer，那么在调用/v1/list时就是/consumer/v1/list
+    context-path: /
+  port: 8110
+
+spring:
+  application:
+    name: consumer-server
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        #默认为Public命名空间,可以省略不写
+        namespace: springcloud-nacos-server
+        #指定配置群组 --如果是Public命名空间 则可以省略群组配置
+        group: DEFAULT_GROUP
+        #文件名 -- 如果没有配置则默认为 ${spring:appliction:name}
+        prefix: ${spring.application.name}
+        #指定文件后缀
+        file-extension: yaml
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: springcloud-nacos-server

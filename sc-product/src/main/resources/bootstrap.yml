@@ -7,6 +7,23 @@ server:
 spring:
   application:
     name: product-server
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        #默认为Public命名空间,可以省略不写
+        namespace: springcloud-nacos-server
+        #指定配置群组 --如果是Public命名空间 则可以省略群组配置
+        group: DEFAULT_GROUP
+        #文件名 -- 如果没有配置则默认为 ${spring:appliction:name}
+        prefix: ${spring.application.name}
+        #指定文件后缀
+        file-extension: yaml
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: springcloud-nacos-server
   datasource:
     username: root
     password: root
@@ -53,14 +70,5 @@ spring:
         # 忽略过滤格式
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://root:123456@localhost:8090/eureka
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-
-ribbon:
-  eureka:
-    enabled: true
