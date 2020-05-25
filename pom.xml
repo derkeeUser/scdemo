@@ -57,12 +57,9 @@
     </dependencies>
 
     <modules>
-        <module>sc-eureka</module>
         <module>sc-product</module>
         <module>sc-consumer</module>
         <module>sc-gateway</module>
-        <module>sc-nacos</module>
-        <module>sc-entity</module>
     </modules>
 
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version-->
@@ -85,11 +82,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.springcloud.entity</groupId>
-                <artifactId>sc-entity</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -104,7 +96,111 @@
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <!--使用默认的变量分割符即${}-->
+                <configuration>
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
+            </plugin>
         </plugins>
+
+        <!-- 测试文件的编译路径设置 注释properties中<maven.test.skip>即可使用该配置-->
+        <!--<testResources>
+            <testResource>
+                &lt;!&ndash;这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包&ndash;&gt;
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+                <filtering>true</filtering>
+            </testResource>
+
+            <testResource>
+                &lt;!&ndash;这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包&ndash;&gt;
+                <directory>src/main/resources/${profiles.active}</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                </includes>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>-->
+
+        <resources>
+            <resource>
+                <!--打包该目录下的 application.yml -->
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+                <!-- 启用过滤 即该资源中的变量将会被过滤器中的值替换 -->
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <!-- ${profiles.active}由profile提供 -->
+                <directory>src/main/resources/${profiles.active}</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <!-- 定义 filter,即该资源中的值将会用来替换同名属性（设置 filtering 为 true 的资源中的属性）-->
+        <filters>
+            <filter>
+                <!-- 如果resources中使用的是application-dev.yml这种格式，则用src/main/resources/${profiles.active}/application-${profiles.active}.yml -->
+                src/main/resources/${profiles.active}/application.yml
+            </filter>
+        </filters>
     </build>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+        </profile>
+
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 预发环境 -->
+            <id>pre</id>
+            <properties>
+                <profiles.active>pre</profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- 生产环境 -->
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

@@ -1,6 +1,6 @@
 package com.springcloud.product.scproduct.controller;
 
-import com.springcloud.entity.scentity.product.TProduct;
+import com.springcloud.product.scproduct.dao.entity.TProduct;
 import com.springcloud.product.scproduct.service.TProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

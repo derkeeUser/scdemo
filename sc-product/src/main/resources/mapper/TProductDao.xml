@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springcloud.product.scproduct.dao.TProductDao">
 
-    <resultMap type="com.springcloud.entity.scentity.product.TProduct" id="TProductMap">
+    <resultMap type="com.springcloud.product.scproduct.dao.entity.TProduct" id="TProductMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="productName" column="product_name" jdbcType="VARCHAR"/>
         <result property="productDescription" column="product_description" jdbcType="VARCHAR"/>

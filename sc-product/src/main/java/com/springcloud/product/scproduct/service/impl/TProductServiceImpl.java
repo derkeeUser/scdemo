@@ -1,7 +1,7 @@
 package com.springcloud.product.scproduct.service.impl;
 
-import com.springcloud.entity.scentity.product.TProduct;
 import com.springcloud.product.scproduct.dao.TProductDao;
+import com.springcloud.product.scproduct.dao.entity.TProduct;
 import com.springcloud.product.scproduct.service.TProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

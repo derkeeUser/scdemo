@@ -58,10 +58,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.springcloud.entity</groupId>
-            <artifactId>sc-entity</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

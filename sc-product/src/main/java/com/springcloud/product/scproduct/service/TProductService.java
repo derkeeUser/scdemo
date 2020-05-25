@@ -1,6 +1,6 @@
 package com.springcloud.product.scproduct.service;
 
-import com.springcloud.entity.scentity.product.TProduct;
+import com.springcloud.product.scproduct.dao.entity.TProduct;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package com.springcloud.entity.scentity.product;
+package com.springcloud.product.scproduct.dao.entity;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (TProduct)实体类
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class TProduct implements Serializable {
     private static final long serialVersionUID = 910029355240823543L;
-    
+
     private Integer id;
     
     private String productName;

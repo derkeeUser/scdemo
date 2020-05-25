@@ -1,6 +1,6 @@
 package com.springcloud.product.scproduct.dao;
 
-import com.springcloud.entity.scentity.product.TProduct;
+import com.springcloud.product.scproduct.dao.entity.TProduct;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
