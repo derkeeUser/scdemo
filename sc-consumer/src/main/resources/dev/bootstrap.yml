@@ -1,8 +1,8 @@
 server:
+  port: 8110
   servlet:
     ## 此处设置值需要加入到请求路径中，如/consumer，那么在调用/v1/list时就是/consumer/v1/list
     context-path: /
-  port: 8110
 
 spring:
   application:
