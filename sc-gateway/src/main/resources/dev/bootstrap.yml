@@ -15,16 +15,16 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-#      routes:
-#        # 路径id 唯一自定义的名称
-#        - id: product-server
-#          # 此处需要使用Lb协议
-#          uri: lb://product-server
-#          predicates:
-#            # 断言，路径相匹配的进行路由  匹配base请求路径后面的接口
-#            - Path=/product/**
-#          filters:
-#            - StripPrefix=1
+      routes:
+        # 认证服务路由
+        - id: auth-server
+          # 此处需要使用Lb协议
+          uri: lb://auth-server
+          predicates:
+            # 断言，路径相匹配的进行路由  匹配base请求路径后面的接口
+            - Path=/auth-server/**
+          filters:
+            - StripPrefix=1
 
 logging:
   level:

@@ -61,6 +61,7 @@
         <module>sc-consumer</module>
         <module>sc-gateway</module>
         <module>sc-common</module>
+        <module>sc-auth</module>
     </modules>
 
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version-->
