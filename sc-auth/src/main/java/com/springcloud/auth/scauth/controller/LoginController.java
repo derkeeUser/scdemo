@@ -70,7 +70,7 @@ public class LoginController {
      * 刷新token
      */
     @GetMapping("/refreshToken")
-    public CommonVO refreshToken(@RequestParam String refreshToken) {
+    public CommonVO refreshToken(@RequestHeader String refreshToken) {
         try {
             String username = (String) redisTemplate.opsForHash().get(refreshToken, "username");
             if (StringUtils.isEmpty(username)) {
@@ -93,8 +93,15 @@ public class LoginController {
         }
     }
 
+    /**
+     * @description: jwt在无状态下无法在服务器端注销，此处只是将token从redis中删除
+     * @Author: Chenxiaoming
+     * @params: [refreshToken]
+     * @date: 2020/8/4 19:33
+     * @return: com.springcloud.common.sccommon.vo.CommonVO
+     */
     @GetMapping("logout")
-    public CommonVO logout(@RequestParam String refreshToken) {
+    public CommonVO logout(@RequestHeader String refreshToken) {
         try {
             redisTemplate.delete(refreshToken);
             return CommonVO.success();

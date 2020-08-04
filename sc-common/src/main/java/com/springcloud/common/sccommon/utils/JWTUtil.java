@@ -21,7 +21,7 @@ public class JWTUtil {
     /**
      * refreshToken过期时间
      */
-    public static final long REFRESH_TOKEN_EXPIRE_TIME = 10 * 60 * 1000;
+    public static final long REFRESH_TOKEN_EXPIRE_TIME = 5 * 60 * 1000;
     /**
      * 签发人
      */
