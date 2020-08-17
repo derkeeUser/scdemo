@@ -75,4 +75,8 @@ public class CommonVO {
     public static CommonVO error(HttpStatusEnum statusEnum, String msg) {
         return new CommonVO(statusEnum.getCode(), msg);
     }
+
+    public static CommonVO error(String msg) {
+        return new CommonVO(HttpStatusEnum.INTERNAL_SERVER_ERROR.getCode(), msg);
+    }
 }

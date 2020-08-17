@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcloud.shiro.scshiro.dao.RoleDao">
+
+    <resultMap type="com.springcloud.shiro.scshiro.entity.Role" id="RoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="dataScope" column="data_scope" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="allField">
+        id,create_time,name,remark,data_scope,level
+    </sql>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RoleMap">
+        select
+        <include refid="allField" />
+        from role
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RoleMap">
+        select
+        <include refid="allField" />
+        from role limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RoleMap">
+        select
+        <include refid="allField" />
+        from role
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="dataScope != null and dataScope != ''">
+                and data_scope = #{dataScope}
+            </if>
+            <if test="level != null">
+                and level = #{level}
+            </if>
+        </where>
+    </select>
+    <select id="queryByUserId" resultMap="RoleMap">
+        select r.*
+        from role r, users_roles ur
+        where r.id = ur.role_id and ur.user_id = #{userId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into role(create_time, name, remark, data_scope, level)
+        values (#{createTime}, #{name}, #{remark}, #{dataScope}, #{level})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update role
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="dataScope != null and dataScope != ''">
+                data_scope = #{dataScope},
+            </if>
+            <if test="level != null">
+                level = #{level},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from role
+        where id = #{id}
+    </delete>
+
+</mapper>
