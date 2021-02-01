@@ -1,4 +1,4 @@
-package com.springcloud.gateway.scgateway.exception;
+package com.springcloud.common.sccommon.exception;
 
 /**
  * @program: questionnaire

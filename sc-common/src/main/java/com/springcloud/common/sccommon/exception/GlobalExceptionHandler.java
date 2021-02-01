@@ -1,4 +1,4 @@
-package com.springcloud.gateway.scgateway.exception;
+package com.springcloud.common.sccommon.exception;
 
 import com.springcloud.common.sccommon.enums.HttpStatusEnum;
 import com.springcloud.common.sccommon.vo.CommonVO;
@@ -9,9 +9,6 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -57,12 +54,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({ConstraintViolationException.class,
             MethodArgumentNotValidException.class,
-            ServletRequestBindingException.class,
+            //ServletRequestBindingException.class,
             MethodArgumentTypeMismatchException.class,
             IllegalArgumentException.class,
             HttpMessageNotReadableException.class})
     public CommonVO handleValidationException(Exception e) {
-        String msg = "";
+        String msg;
         if (e instanceof MethodArgumentNotValidException) {
             MethodArgumentNotValidException t = (MethodArgumentNotValidException) e;
             msg = t.getBindingResult().getAllErrors().stream()
@@ -73,15 +70,15 @@ public class GlobalExceptionHandler {
             msg = t.getConstraintViolations().stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.joining(","));
-        } else if (e instanceof MissingServletRequestParameterException) {
-            MissingServletRequestParameterException t = (MissingServletRequestParameterException) e;
-            msg = t.getParameterName() + " 不能为空";
-        } else if (e instanceof MissingPathVariableException) {
-            MissingPathVariableException t = (MissingPathVariableException) e;
-            msg = t.getVariableName() + " 不能为空";
-        } else if (e instanceof IllegalArgumentException) {
-            IllegalArgumentException t = (IllegalArgumentException) e;
-            msg = t.getMessage();
+        //} else if (e instanceof MissingServletRequestParameterException) {
+        //    MissingServletRequestParameterException t = (MissingServletRequestParameterException) e;
+        //    msg = t.getParameterName() + " 不能为空";
+        //} else if (e instanceof MissingPathVariableException) {
+        //    MissingPathVariableException t = (MissingPathVariableException) e;
+        //    msg = t.getVariableName() + " 不能为空";
+        //} else if (e instanceof IllegalArgumentException) {
+        //    IllegalArgumentException t = (IllegalArgumentException) e;
+        //    msg = t.getMessage();
         } else {
             msg = "参数有误";
         }

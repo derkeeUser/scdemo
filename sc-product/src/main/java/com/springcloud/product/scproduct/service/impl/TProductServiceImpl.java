@@ -67,7 +67,7 @@ public class TProductServiceImpl implements TProductService {
      */
     @Override
     public TProduct update(TProduct tProduct) {
-        this.tProductDao.update(tProduct);
+        this.tProductDao.updateById(tProduct);
         return this.queryById(tProduct.getId());
     }
 

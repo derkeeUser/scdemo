@@ -35,6 +35,8 @@
         <common-pool.version>2.8.0</common-pool.version>
         <hutool.version>5.3.8</hutool.version>
         <commons-collections4.version>4.4</commons-collections4.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <sharding-jdbc.version>4.0.0-RC2</sharding-jdbc.version>
     </properties>
 
     <dependencies>
@@ -135,6 +137,16 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-core</artifactId>
+                <version>${sharding-jdbc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

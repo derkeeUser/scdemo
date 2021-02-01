@@ -17,13 +17,45 @@ spring:
         namespace: springcloud-nacos-server
         #指定配置群组 --如果是Public命名空间 则可以省略群组配置
         group: DEFAULT_GROUP
-        #文件名 -- 如果没有配置则默认为 ${spring:appliction:name}
+        #文件名 -- 如果没有配置则默认为 ${spring:application:name}
         prefix: ${spring.application.name}
         #指定文件后缀
         file-extension: yaml
       discovery:
         server-addr: 127.0.0.1:8848
         namespace: springcloud-nacos-server
+
+  # 配置Sharding-JDBC的分片策略
+  shardingsphere:
+    datasource:
+      names: sc
+      pd0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/sc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+    sharding:
+      # 配置表的分布，表的策略
+      tables:
+        t_product:
+          actual-data-nodes: sc.t_product_$->{0..1}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              # 指定分片策略 约定id值是偶数添加到t_product_0表，如果gid是奇数添加到t_product__1表
+              sharding-column: id
+              algorithm-expression: t_product_$->{id % 2}
+    props:
+      sql:
+        show: true
+
+# 配置允许后面的Bean覆盖前面名称重复的Bean
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     username: root
     password: root

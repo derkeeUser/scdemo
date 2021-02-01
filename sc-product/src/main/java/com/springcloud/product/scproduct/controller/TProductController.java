@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,6 +64,17 @@ public class TProductController {
         result.put("username", username);
         result.put("password", password);
         return result;
+    }
+
+    @PostMapping("/batch/add")
+    public String batch() {
+        for (int i = 1; i <= 10; i++) {
+            TProduct product = new TProduct();
+            product.setProductName("产品" + i);
+            product.setProductDescription("产品描述" + i);
+            tProductService.insert(product);
+        }
+        return "ok";
     }
 
 }

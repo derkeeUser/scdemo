@@ -12,7 +12,7 @@
     <artifactId>sc-shiro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sc-shiro</name>
-    <description>Shiro for Spring Boot</description>
+    <description>Shiro demo, 跟SpringCloud无关</description>
 
     <dependencies>
         <dependency>
