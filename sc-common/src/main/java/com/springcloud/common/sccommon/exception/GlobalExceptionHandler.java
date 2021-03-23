@@ -10,6 +10,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -97,6 +98,17 @@ public class GlobalExceptionHandler {
     public CommonVO handleAuthorizationException(AuthorizationException e) {
         log.error("身份验证异常：{}", e.getMessage(), e);
         return CommonVO.error(HttpStatusEnum.UNAUTHORIZED, e.getMessage());
+    }
+
+    /**
+     * 拦截自定义异常
+     * @ExceptionHandler 拦截指定的异常
+     */
+    @ResponseBody
+    @ExceptionHandler(BusinessException.class)
+    public CommonVO notFount(BusinessException e) {
+        log.error("业务异常：", e);
+        return CommonVO.error(e.getMessage());
     }
 
     /**

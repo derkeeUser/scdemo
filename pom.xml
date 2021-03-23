@@ -37,6 +37,8 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <sharding-jdbc.version>4.0.0-RC2</sharding-jdbc.version>
+        <swagger.version>2.9.2</swagger.version>
+        <pagehelper.version>1.2.10</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -81,6 +83,7 @@
         <module>sc-common</module>
         <module>sc-auth</module>
         <module>sc-shiro</module>
+        <module>sc-rabbitmq</module>
     </modules>
 
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version-->
@@ -147,6 +150,23 @@
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-core</artifactId>
                 <version>${sharding-jdbc.version}</version>
+            </dependency>
+            <!-- 使用 Swagger 生成接口文档 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- PageHelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

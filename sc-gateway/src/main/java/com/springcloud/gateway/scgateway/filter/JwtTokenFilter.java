@@ -1,3 +1,4 @@
+/*
 package com.springcloud.gateway.scgateway.filter;
 
 import com.alibaba.fastjson.JSONObject;
@@ -21,19 +22,23 @@ import reactor.core.publisher.Mono;
 import javax.annotation.Resource;
 import java.util.Arrays;
 
+*/
 /**
  * @program: scdemo
  * @description: 全局过滤器
  * @author: Chenxiaoming
  * @create: 2020-07-31 16:30:52
- */
+ *//*
+
 @Slf4j
 @Component
 public class JwtTokenFilter implements GlobalFilter, Ordered {
 
-    /**
+    */
+/**
      * 排除过滤的 uri 地址
-     */
+     *//*
+
     private static final String[] EXCLUDE_URL = {"/auth-server/auth/login", "/auth-server/auth/logout", "/auth-server/auth/refresh"};
 
     @Resource(name = "stringRedisTemplate")
@@ -80,3 +85,4 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
         return -200;
     }
 }
+*/

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springcloud.mq.scrabbitmq.mapper.MessageMapper">
+
+	<resultMap id="BaseResultMap" type="com.springcloud.mq.scrabbitmq.entity.Message" >
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="consumer_queue" jdbcType="VARCHAR" property="consumerQueue" />
+		<result column="message_body" jdbcType="LONGVARCHAR" property="messageBody" />
+		<result column="resend_times" jdbcType="INTEGER" property="resendTimes" />
+		<result column="already_dead" jdbcType="INTEGER" property="alreadyDead" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,
+		consumer_queue,
+		message_body,
+		resend_times,
+		already_dead,
+		status,
+		confirm_time,
+		create_time,
+		update_time
+	 </sql>
+
+  	<!-- 增加开始 -->
+  	<insert id="insert" parameterType="com.springcloud.mq.scrabbitmq.entity.Message">
+		insert into message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="id != null">
+				id,
+		  	</if>
+		  	<if test="consumerQueue != null and consumerQueue.trim != ''">
+				consumer_queue,
+		  	</if>
+		  	<if test="messageBody != null and messageBody.trim != ''">
+				message_body,
+		  	</if>
+		  	<if test="resendTimes != null">
+				resend_times,
+		  	</if>
+		  	<if test="alreadyDead != null">
+				already_dead,
+		  	</if>
+		  	<if test="status != null">
+				status,
+		  	</if>
+		  	<if test="confirmTime != null">
+				confirm_time,
+		  	</if>
+		  	<if test="createTime != null">
+				create_time,
+		  	</if>
+		  	<if test="updateTime != null">
+				update_time,
+		  	</if>
+		</trim>
+   		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		  	<if test="id != null">
+				#{id,jdbcType=BIGINT},
+		  	</if>
+		  	<if test="consumerQueue != null and consumerQueue.trim != ''">
+				#{consumerQueue,jdbcType=VARCHAR},
+		  	</if>
+		  	<if test="messageBody != null and messageBody.trim != ''">
+				#{messageBody,jdbcType=LONGVARCHAR},
+		  	</if>
+		  	<if test="resendTimes != null">
+				#{resendTimes,jdbcType=INTEGER},
+		  	</if>
+		  	<if test="alreadyDead != null">
+				#{alreadyDead,jdbcType=INTEGER},
+		  	</if>
+		  	<if test="status != null">
+				#{status,jdbcType=INTEGER},
+		  	</if>
+		  	<if test="confirmTime != null">
+				#{confirmTime,jdbcType=TIMESTAMP},
+		  	</if>
+		  	<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+		  	</if>
+		  	<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+		  	</if>
+   		</trim>
+	</insert>
+	<!-- 增加结束 -->
+
+	<!-- 根据ID查询开始 -->
+	<select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from message
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<!-- 根据ID查询结束 -->
+
+	<!-- 列表查询开始 -->
+	<select id="selectList" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"/>
+		from message
+		<where>
+		</where>
+	</select>
+	<!-- 列表查询结束 -->
+
+	<!-- 查询太长时间没有确定的消息开始 -->
+	<select id="selectTooLongUnConfirmMessageList" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"/>
+		from message
+		<where>
+			consumer_queue = #{consumerQueue,jdbcType=VARCHAR}
+			AND create_time &lt; #{createEndTime,jdbcType=TIMESTAMP}
+		</where>
+		ORDER BY consumer_queue, create_time
+	</select>
+	<!-- 查询太长时间没有确定的消息结束 -->
+
+	<!-- 查询已发送，未死亡的太长时间没有消费的消息开始 -->
+	<select id="selectTooLongUnConsumeMessageList" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"/>
+		from message
+		<where>
+			AND confirm_time &lt; #{sendEndTime,jdbcType=TIMESTAMP}
+		</where>
+		ORDER BY resend_times desc
+	</select>
+	<!-- 查询已发送，未死亡的太长时间没有消费的消息结束 -->
+
+	<!-- 修改开始 -->
+	<update id="updateById" parameterType="com.springcloud.mq.scrabbitmq.entity.Message">
+	  	update message
+	  	<set>
+			<if test="consumerQueue != null and consumerQueue.trim != ''">
+				consumer_queue = #{consumerQueue,jdbcType=VARCHAR},
+			 </if>
+			<if test="messageBody != null and messageBody.trim != ''">
+				message_body = #{messageBody,jdbcType=LONGVARCHAR},
+			 </if>
+			<if test="resendTimes != null">
+				resend_times = #{resendTimes,jdbcType=INTEGER},
+			 </if>
+			<if test="alreadyDead != null">
+				already_dead = #{alreadyDead,jdbcType=INTEGER},
+			 </if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			 </if>
+			<if test="confirmTime != null">
+				confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+			 </if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			 </if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			 </if>
+	  	</set>
+	  	where id = #{id,jdbcType=BIGINT}
+	</update>
+	<!-- 修改结束 -->
+
+	<!-- 根据重发次数设置消息为死亡状态开始 -->
+	<update id="updateMessageDead">
+	  	update message set already_dead = 1
+	  	where resend_times = #{resendTimes,jdbcType=INTEGER}
+	</update>
+	<!-- 根据重发次数设置消息为死亡状态结束 -->
+
+	<!-- 删除开始 -->
+	<delete id="deleteById" parameterType="java.lang.Long">
+	 	delete from message
+	 	where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<!-- 删除结束 -->
+
+</mapper>
