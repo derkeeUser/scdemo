@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class ScRabbitmqApplication {
+public class ScRabbitmqServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ScRabbitmqApplication.class, args);
+        SpringApplication.run(ScRabbitmqServiceApplication.class, args);
     }
 
 }

@@ -39,6 +39,7 @@
         <sharding-jdbc.version>4.0.0-RC2</sharding-jdbc.version>
         <swagger.version>2.9.2</swagger.version>
         <pagehelper.version>1.2.10</pagehelper.version>
+        <hystrix.version>2.2.6.RELEASE</hystrix.version>
     </properties>
 
     <dependencies>
@@ -80,10 +81,8 @@
         <module>sc-product</module>
         <module>sc-consumer</module>
         <module>sc-gateway</module>
-        <module>sc-common</module>
         <module>sc-auth</module>
         <module>sc-shiro</module>
-        <module>sc-rabbitmq</module>
     </modules>
 
     <!--子模块继承之后，提供作用：锁定版本+子module不用写groupId和version-->
@@ -167,6 +166,11 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${hystrix.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
