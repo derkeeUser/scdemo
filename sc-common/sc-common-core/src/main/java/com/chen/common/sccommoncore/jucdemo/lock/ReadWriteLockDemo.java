@@ -1,4 +1,4 @@
-package com.chen.common.sccommoncore.jucdemo;
+package com.chen.common.sccommoncore.jucdemo.lock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class ReadWriteLockDemo {
                 myCache.put(String.valueOf(temp), temp);
             }, String.valueOf(i)).start();
             new Thread(() -> {
-                myCache.get(String.valueOf(temp));
+                System.out.println(myCache.get(String.valueOf(temp)));;
             }, String.valueOf(i)).start();
         }
     }
@@ -31,8 +31,8 @@ public class ReadWriteLockDemo {
 
 class MyCache<T> {
 
-    private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    private Map<String, T> cacheMap = new HashMap<>();
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    private final Map<String, T> cacheMap = new HashMap<>();
 
     public void put(String key, T value) {
         try {

@@ -1,4 +1,4 @@
-package com.chen.common.sccommoncore.jucdemo;
+package com.chen.common.sccommoncore.jucdemo.lock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

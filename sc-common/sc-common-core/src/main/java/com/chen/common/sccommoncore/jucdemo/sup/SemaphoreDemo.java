@@ -1,4 +1,4 @@
-package com.chen.common.sccommoncore.jucdemo;
+package com.chen.common.sccommoncore.jucdemo.sup;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Semaphore;

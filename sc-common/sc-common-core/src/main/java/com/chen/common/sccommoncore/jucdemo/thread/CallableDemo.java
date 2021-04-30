@@ -1,4 +1,4 @@
-package com.chen.common.sccommoncore.jucdemo;
+package com.chen.common.sccommoncore.jucdemo.thread;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

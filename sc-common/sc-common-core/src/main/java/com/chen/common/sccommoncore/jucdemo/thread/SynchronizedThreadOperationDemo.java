@@ -1,4 +1,4 @@
-package com.chen.common.sccommoncore.jucdemo;
+package com.chen.common.sccommoncore.jucdemo.thread;
 
 /**
  * @program: scdemo
