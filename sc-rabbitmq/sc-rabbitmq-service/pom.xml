@@ -8,11 +8,8 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.springcloud.mq</groupId>
+
     <artifactId>sc-rabbitmq-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>sc-rabbitmq-service</name>
-    <description>sc-rabbitmq-service project for Spring Boot</description>
 
     <dependencies>
         <dependency>
@@ -59,6 +56,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.chen.common</groupId>
+            <artifactId>sc-common-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -82,28 +83,15 @@
                     <useDefaultDelimiters>true</useDefaultDelimiters>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
         </plugins>
-
-        <!-- 测试文件的编译路径设置 注释properties中<maven.test.skip>即可使用该配置-->
-        <!--<testResources>
-            <testResource>
-                &lt;!&ndash;这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包&ndash;&gt;
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>application.yml</include>
-                </includes>
-                <filtering>true</filtering>
-            </testResource>
-
-            <testResource>
-                &lt;!&ndash;这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包&ndash;&gt;
-                <directory>src/main/resources/${profiles.active}</directory>
-                <includes>
-                    <include>**/*.yml</include>
-                </includes>
-                <filtering>false</filtering>
-            </testResource>
-        </testResources>-->
 
         <resources>
             <resource>

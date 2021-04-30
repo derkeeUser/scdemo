@@ -9,10 +9,6 @@
     <name>sc-rabbitmq-api</name>
     <packaging>jar</packaging>
 
-    <properties>
-        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

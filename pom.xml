@@ -81,7 +81,6 @@
         <module>sc-product</module>
         <module>sc-consumer</module>
         <module>sc-gateway</module>
-        <module>sc-auth</module>
         <module>sc-shiro</module>
     </modules>
 
@@ -104,11 +103,6 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.springcloud.common</groupId>
-                <artifactId>sc-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

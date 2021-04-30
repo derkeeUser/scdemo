@@ -1,6 +1,5 @@
 package com.springcloud.mq.scrabbitmq.controller;
 
-import com.springcloud.common.sccommon.vo.CommonVO;
 import com.springcloud.mq.scrabbitmq.entity.Queue;
 import com.springcloud.mq.scrabbitmq.service.QueueService;
 import io.swagger.annotations.Api;
