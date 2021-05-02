@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @program: scdemo
- * @description: 手动创建ThreadPoolExecutor线程池
+ * @description: 手动创建ThreadPoolExecutor线程池：三大方法、七大参数、四种拒绝策略
  * new ThreadPoolExecutor.AbortPolicy() 当执行线程数大于线程池设置线程数时，不会处理多余的线程，抛出异常
  * new ThreadPoolExecutor.CallerRunsPolicy() 当执行线程数大于线程池设置线程数时，多余线程会被主线程执行，不抛异常
  * new ThreadPoolExecutor.AbortPolicy() 当执行线程数大于线程池设置线程数时，多余的线程将会丢失，不抛异常
@@ -20,7 +20,7 @@ public class ThreadPoolExecutorDemo {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
                 // 核心线程数
                 2,
-                // 最大线程数：cpu核数 or IO密集型
+                // 最大线程数：cpu密集型 or IO密集型
                 5,
                 // 超时时间
                 3,
