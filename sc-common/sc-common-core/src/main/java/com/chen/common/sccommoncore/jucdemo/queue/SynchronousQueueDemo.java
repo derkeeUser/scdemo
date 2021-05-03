@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @program: scdemo
- * @description: 同步队列SynchronousQueue使用
+ * @description: 同步队列SynchronousQueue使用：只能写入一个和独读出一个元素，不能同时读写多个元素
  * @author: chenxiaoming
  * @create: 2021-04-30 10:32:18
  */
