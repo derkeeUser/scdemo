@@ -5,31 +5,75 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @program: scdemo
- * @description: ReentrantLock锁
+ * @description: 可重入锁的使用：获取外部对象的锁后，相当于获取内部所有的锁
  * @author: chenxiaoming
- * @create: 2021-04-29 10:55:40
+ * @create: 2021-05-05 15:00:25
  */
 public class ReentrantLockDemo {
+
     public static void main(String[] args) {
-        ReentrantLockBiz sect = new ReentrantLockBiz();
-        new Thread(() -> {for (int i = 0; i < 100; i++) {sect.decrement();}},"A").start();
-        new Thread(() -> {for (int i = 0; i < 100; i++) {sect.decrement();}},"B").start();
+        Phone phone = new Phone();
+        Phone2 phone2 = new Phone2();
+
+        new Thread(() -> {
+            phone.sms();
+        }, "A").start();
+
+        new Thread(() -> {
+            phone.sms();
+        }, "B").start();
+
+        new Thread(() -> {
+            phone2.sms();
+        }, "C").start();
+
+        new Thread(() -> {
+            phone2.sms();
+        }, "D").start();
     }
 }
 
-class ReentrantLockBiz {
+/**
+ * synchronized可重入锁demo
+ */
+class Phone {
+
+    public synchronized void sms() {
+        System.out.println("=============== synchronized可重入锁demo ================");
+        System.out.println(Thread.currentThread().getName() + " send messaging...");
+        call();
+    }
+
+    public synchronized void call() {
+        System.out.println(Thread.currentThread().getName() + " calling...");
+    }
+}
+
+/**
+ * ReentrantLock可重入锁demo：lock unlock必须成对出现，否则会造成死锁
+ */
+class Phone2 {
     Lock lock = new ReentrantLock();
 
-    private int nums = 100;
-
-    public void decrement() {
+    public void sms() {
         lock.lock();
         try {
-            if (nums > 0) {
-                System.out.println(Thread.currentThread().getName() + "成功卖出1，剩余：" + (--nums));
-            }
+            System.out.println("=============== ReentrantLock可重入锁demo ================");
+            System.out.println(Thread.currentThread().getName() + " send messaging...");
+            call();
         } catch (Exception e) {
-            System.out.println("异常：" + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void call() {
+        lock.lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + " calling...");
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             lock.unlock();
         }

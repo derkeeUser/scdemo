@@ -26,6 +26,10 @@ public class Lazy2 {
         }
     }
 
+    /**
+     * 双重校验方式；对象加上volatile修饰保证可见性和禁止指令重排，在多线程环境下不会遭到破坏
+     * @return
+     */
     public static Lazy2 getInstance() {
         if (lazy == null) {
             // 在多线程环境下,不使用双重校验锁的单例会遭到破坏(会产生多个对象)
@@ -39,9 +43,9 @@ public class Lazy2 {
     }
 
     public static void main(String[] args) {
-        // 反射破坏双重校验锁
+        // 尝试用反射破坏双重校验锁
         // 通过Lazy获取单例后，防止后续通过反射破坏
-        // 此方式不能完全抵御反射破坏，如果不使用单例类创建对象则不能抵御反射破坏
+        // 此方式不能完全抵御反射破坏，如果不使用单例类创建对象则不能抵御反射破坏，实际demo可看Lazy3.java
         try {
             Lazy2 instance = Lazy2.getInstance();
             Constructor<Lazy2> constructor = Lazy2.class.getDeclaredConstructor(null);

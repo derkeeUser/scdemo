@@ -48,6 +48,8 @@ public class ForkJoinTest {
     }
 
     public static void test3() {
+
+
         long startTime = System.currentTimeMillis();
         long total = LongStream.rangeClosed(START, END).parallel().reduce(0, Long::sum);
         long endTime = System.currentTimeMillis();

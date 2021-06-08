@@ -17,6 +17,10 @@ public class Lazy {
         System.out.println(Thread.currentThread().getName()+" ok");
     }
 
+    /**
+     * 普通方式
+     * @return
+     */
     public static Lazy getInstance() {
         if (lazy == null) {
             // 在多线程环境下,不使用双重校验锁的单例会遭到破坏(会产生多个对象)
@@ -25,6 +29,10 @@ public class Lazy {
         return lazy;
     }
 
+    /**
+     * 双重校验方式；对象加上volatile修饰保证可见性和禁止指令重排，在多线程环境下不会遭到破坏，实例看Lazy2.java
+     * @return
+     */
     public static Lazy getInstance2() {
         if (lazy == null) {
             // 双重校验锁
